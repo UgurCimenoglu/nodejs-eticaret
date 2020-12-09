@@ -1,5 +1,5 @@
 # nodejs-eticaret
-HTML - CSS - Javascript Frontend
+HTML - CSS - Javascript - Bootstrap Frontend
 NodeJs MongoDB Backend
 Kullanıcı üye sistemi
 Satıcılar için Ürün ekleme güncelleme Silme
