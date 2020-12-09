@@ -9,7 +9,7 @@ const csrf = require("csurf");
 const multer = require("multer");
 
 const connectionString =
-  "mongodb+srv://ugurcimenoglu:Ugur1621@cluster0.2ywuf.mongodb.net/eticaretmongoose?retryWrites=true&w=majority";
+  "mongodbURI";
 
 var store = new MongoDBStore({
   uri: connectionString,
