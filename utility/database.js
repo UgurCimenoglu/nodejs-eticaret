@@ -2,11 +2,11 @@ const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
 let _db;
-//mongodb+srv://ugurcimenoglu:YFITiTQITbBa4swT@cluster0.6g0xf.mongodb.net/test
+
 const mongoConnect = (callback) => {
-  //MongoClient.connect('mongodb://localhost/e-ticaret')
+ 
   MongoClient.connect(
-    "mongodb+srv://ugurcimenoglu:YFITiTQITbBa4swT@cluster0.6g0xf.mongodb.net/eticaret?retryWrites=true&w=majority",
+    "mongodbURI",
     { useNewUrlParser: true }
   )
     .then((client) => {
