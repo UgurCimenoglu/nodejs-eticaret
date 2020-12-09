@@ -1,0 +1,14 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if errorMessage
+        div.alert.alert-danger.col-sm-7#editAlert #{errorMessage}
+    form(action='/account/reset-password' method='post')
+        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+        .form-group.row
+            label.col-sm-2.col-form-label(for='email') Email
+            .col-sm-5
+                input#email.form-control(type='email' name='email')
+
+        .form-group.row.offset-2
+            button.btn.btn-primary(type='submit') Reset

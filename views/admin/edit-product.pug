@@ -1,0 +1,41 @@
+extends ../layouts/main-layout.pug
+
+block content
+    form(action='/admin/products' method='post' enctype="multipart/form-data")
+        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+        input#id(type="hidden" name="id" value=`${product._id}`)
+
+        .form-group.row
+            label.col-sm-2.col-form-label(for='name') Product Name
+            .col-sm-10
+                input#name.form-control(type='text' name='name' value=`${product.name}`)
+
+        .form-group.row
+            label.col-sm-2.col-form-label(for='price') Price
+            .col-sm-10
+                input#price.form-control(type='text' name='price' value=`${product.price}`)
+
+        .form-group.row
+            label.col-sm-2.col-form-label(for='imageURL') İmage
+            .col-sm-10
+                img(src=`/img/${product.imageURL}`, alt="", srcset="", width="100px")
+                input#image(type='file' name='imageURL' value=`${product.imageURL}`)
+
+        .form-group.row
+            label.col-sm-2.col-form-label(for='categoryid') Category
+            .col-sm-10
+                each category in categories
+                    input(type="checkbox", name="categoryids", checked=category.selected, value=`${category._id}`).my-2
+                    | #{category.name}
+                    br
+        .form-group.row
+            label.col-sm-2.col-form-label(for='description') Description
+            .col-sm-10
+                textarea.form-control(id="editor1" name="description", cols="30", rows="10") #{product.description}
+
+        .form-group.row.offset-2
+            button.btn.btn-primary(type='submit') Save Product
+
+block script
+    script(src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js")
+    script(src="/js/ckeditor.js")

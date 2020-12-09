@@ -1,0 +1,15 @@
+mixin createProduct(product)
+          .col-md-4.my-4
+            .card
+              img(src=`/img/${product.imageURL}` alt=`${product.description}`).card-img-top
+              .card-body
+                h4.card-title
+                  a(href=`/products/${product.id}`) #{product.name}
+                small.text-muted
+                  i.fa.fa-try #{product.price}
+              .card-footer.text-center
+                a.btn.btn-outline-primary.btn-sm(href=`/products/${product._id}`) Details
+                form(action="/cart", method="post")
+                  input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                  input(type="hidden", name="productid" , value=`${product._id}`)
+                  button(type="submit").btn.btn-outline-primary.btn-sm.ml-3 Add To Card

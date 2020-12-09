@@ -1,0 +1,25 @@
+extends ../layouts/main-layout.pug
+
+block content
+    form(action='/account/register' method='post')
+        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+        if errorMessage
+            div.alert.alert-danger.col-sm-7#editAlert !{errorMessage}
+        
+        .form-group.row
+            label.col-sm-2.col-form-label(for='name') Name
+            .col-sm-5
+                input#name.form-control(type='text' name='name')
+
+        .form-group.row
+            label.col-sm-2.col-form-label(for='email') Email
+            .col-sm-5
+                input#email.form-control(type='email' name='email')
+
+        .form-group.row
+            label.col-sm-2.col-form-label(for='password') Password
+            .col-sm-5
+                input#password.form-control(type='password' name='password')
+
+        .form-group.row.offset-2
+            button.btn.btn-primary(type='submit') Create Account

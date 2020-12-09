@@ -1,0 +1,43 @@
+
+extends ../layouts/main-layout.pug
+
+block content    
+
+    if products.length >0
+        table.table.table-bordered
+            thead
+                tr
+                    th Image
+                    th Product Name
+                    th Price
+                    th Quantity
+                    th Description
+            tbody
+                each product in products
+                    tr
+                        td
+                            img(src=`/img/${product.productId.imageURL}`, width="80")
+                        td #{product.productId.name}
+                        td #{product.productId.price}
+                        td #{product.quantity}
+                        td
+                            form(action="/delete-cartitem", method="post")
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                input(type="hidden", name="productid" value=`${product.productId._id}`)
+                                button(type="submit").btn.btn-danger.btn-sm.ml-3.mt-3 Delete
+                br
+            tfoot
+                td(colspan="4")
+                -var total = 0;
+                each product in products
+                    -total += (product.productId.price * product.quantity)
+                td Toplam : #{total} TL
+        .text-center
+            br
+            a(href="/").btn.btn-secondary Alışverişe Devam Et
+            form(action="/create-order", method="post")
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                button(type="submit").btn.btn-primary.ml-2 Alışverişi Tamamla
+
+    else
+        h1 No Products in Cart        

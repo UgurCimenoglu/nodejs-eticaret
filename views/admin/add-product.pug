@@ -1,0 +1,78 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if errorMessage
+        div.alert.alert-danger.col-sm-12#editAlert !{errorMessage}
+    if !inputs
+        form(action='/admin/add-product' method='post' enctype='multipart/form-data')
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group.row
+                label.col-sm-2.col-form-label(for='name') Product Name
+                .col-sm-10
+                    input#name.form-control(type='text' name='name')
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='price') Price
+                .col-sm-10
+                    input#price.form-control(type='text' name='price')
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='imageURL') İmage
+                .col-sm-10
+                    input#image.form-control-file(type='file' name='imageURL')
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='categoryid') Category
+                .col-sm-10
+                    select.form-control(name='categoryid')
+                        option(value="") Select Category
+                        each category in categories
+                            option(value=`${category._id}`) #{category.name}
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='description') Description
+                .col-sm-10
+                    textarea.form-control(id="editor1" name="description", cols="30", rows="10")
+
+            .form-group.row.offset-2
+                button.btn.btn-primary(type='submit') Save Product
+
+
+
+    if inputs
+        form(action='/admin/add-product' method='post' enctype='multipart/form-data')
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group.row
+                label.col-sm-2.col-form-label(for='name') Product Name
+                .col-sm-10
+                    input#name.form-control(type='text' name='name' value=`${inputs.name}`)
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='price') Price
+                .col-sm-10
+                    input#price.form-control(type='text' name='price' value=`${inputs.price}`)
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='imageURL') İmage
+                .col-sm-10
+                    input#image.form-control-file(type='file' name='imageURL' value=`${inputs.imageURL}`)
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='categoryid') Category
+                .col-sm-10
+                    select.form-control(name='categoryid')
+                        option(value="") Select Category
+                        each category in categories
+                            option(value=`${category._id}`) #{category.name}
+
+            .form-group.row
+                label.col-sm-2.col-form-label(for='description') Description
+                .col-sm-10
+                    textarea.form-control(id="editor1" name="description", cols="30", rows="10")
+
+            .form-group.row.offset-2
+                button.btn.btn-primary(type='submit') Save Product
+
+block script
+    script(src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js")
+    script(src="/js/ckeditor.js")
